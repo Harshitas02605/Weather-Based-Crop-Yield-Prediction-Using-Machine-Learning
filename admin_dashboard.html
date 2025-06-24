@@ -1,0 +1,29 @@
+{% macro dashboard(list_of_all_users) %}
+<div class="admin-dashboard">
+  <h2 class="dashboard-title">Admin Dashboard</h2>
+  <div class="users-table-container">
+    <table class="users-table">
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>User Dashboard</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in list_of_all_users %}
+          <tr>
+              <td>{{ user["username"] }}</td>
+              <td>
+                  {% if user.user_category == "admin" %}
+                    <div>Admin Account</div>
+                  {% else %}
+                    <a href="{{ url_for('user_dashboard', user_id=user.id) }}" class="user-link">Go to User Dashboard</a>
+                  {% endif %}
+              </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endmacro %}
